@@ -14,4 +14,4 @@ jobs:
     secrets: inherit
     with:
       pr_number: ${{ github.event.number }}
-      checkout_ref: ${{ github.event.pull_request.head.ref }}
+      checkout_ref: ${{ github.event.pull_request.head.sha }}
