@@ -1,0 +1,37 @@
+name: Auto Upload Payloads to Safe
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "auto-upload/**/*.json"
+  workflow_dispatch:
+    inputs:
+      payload-directory:
+        description: "Directory containing payload JSON (e.g. auto-upload/)"
+        required: true
+        type: string
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    if: github.repository == 'BalancerMaxis/multisig-ops'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Upload payloads to Safe
+        uses: maxyz-xyz/safe-queue-action@v1
+        with:
+          payload-directory: ${{ github.event.inputs.payload-directory || 'auto-upload/' }}
+          drpc-key: ${{ secrets.DRPC_KEY }}
+          signer-private-key: ${{ secrets.SAFE_QUEUE_ACTION_PROPOSER }}
+          nested-safe: "0xBeF27037bC6311b96635E5e9Af3A73EBF6Ca8878"
+          changed-files-only: ${{ github.event_name == 'push' && 'true' || 'false' }}
+          tenderly-access-key: ${{ secrets.TENDERLY_ACCESS_KEY }}
+          tenderly-account-name: ${{ secrets.TENDERLY_ACCOUNT_NAME }}
+          tenderly-project-name: ${{ secrets.TENDERLY_PROJECT_NAME }}
