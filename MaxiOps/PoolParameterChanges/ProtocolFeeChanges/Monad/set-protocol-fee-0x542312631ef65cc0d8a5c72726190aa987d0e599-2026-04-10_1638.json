@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "chainId": "143",
+  "createdAt": 1775831933872,
+  "meta": {
+    "name": "Transactions Batch",
+    "description": "Set protocol yield fee to 0% for DFB KTB / wnUSDC",
+    "createdFromSafeAddress": "0x9ff471F9f98F42E5151C7855fD1b5aa906b1AF7e"
+  },
+  "transactions": [
+    {
+      "to": "0xCaCC7E1efEEA8BB3af6d5720d12C1876aa6EE76b",
+      "value": "0",
+      "data": null,
+      "contractMethod": {
+        "inputs": [
+          { "name": "pool", "type": "address", "internalType": "address" },
+          {
+            "name": "newProtocolYieldFeePercentage",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ],
+        "name": "setProtocolYieldFeePercentage",
+        "payable": false
+      },
+      "contractInputsValues": {
+        "pool": "0x542312631ef65cc0d8a5c72726190aa987d0e599",
+        "newProtocolYieldFeePercentage": "0"
+      }
+    }
+  ]
+}
